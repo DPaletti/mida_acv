@@ -17,3 +17,6 @@ def main():
     # visualize_path(
     #    data_dict_simplified["stem-double"][0], data_path, data_dict["stem-double"][0]
     # )
+
+
+main()

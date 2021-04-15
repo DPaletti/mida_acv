@@ -18,4 +18,4 @@ def write_to_csv(path: str, data: Dict[str, List[pd.DataFrame]]) -> None:
         full_path = Path(path).joinpath(k[: k.find("-")], k[k.find("-") + 1 :])
         full_path.mkdir(parents=True, exist_ok=True)
         for index, df in enumerate(v):
-            df.to_csv(full_path.joinpath("timeseries-" + str(index)).open("w"))
+            df.to_csv(full_path.joinpath("timeseries-" + str(index) + ".csv").open("w"))

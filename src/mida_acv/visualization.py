@@ -43,7 +43,7 @@ def visualize_signal(
         go.Scatter(
             mode="markers+lines",
             x=df["Timestamp"],
-            y=df[signal if signal == "Speed" else signal + "x"],
+            y=df[signal if signal not in {"A", "G", "Jerk_"} else signal + "x"],
             marker={"size": 3},
             name=label,
         )
@@ -58,13 +58,13 @@ def visualize_signal(
         template="plotly_white",
     )
 
-    if signal == "Speed":
+    if signal not in {"A", "G", "Jerk_"}:
         for _df, _label in args:
             fig.add_trace(
                 go.Scatter(
                     mode="markers+lines",
                     x=_df["Timestamp"],
-                    y=_df["Speed"],
+                    y=_df[signal],
                     marker={"size": 3},
                     name=_label,
                 )
@@ -75,17 +75,16 @@ def visualize_signal(
         for t in args:
             dfs.append(t[0])
             labels.append(t[1])
-        else:
-            for _df, _label, axis in zip(dfs, labels, ["y", "z"]):
-                fig.add_trace(
-                    go.Scatter(
-                        mode="markers+lines",
-                        x=_df["Timestamp"],
-                        y=_df["Speed" if signal == "Speed" else signal + axis],
-                        marker={"size": 3},
-                        name=_label,
-                    )
+        for _df, _label, axis in zip(dfs, labels, ["y", "z"]):
+            fig.add_trace(
+                go.Scatter(
+                    mode="markers+lines",
+                    x=_df["Timestamp"],
+                    y=_df["Speed" if signal == "Speed" else signal + axis],
+                    marker={"size": 3},
+                    name=_label,
                 )
+            )
     return fig
 
 
@@ -93,6 +92,7 @@ def visualize_all(
     plot_path: str,
     driver: str,
     weight: int,
+    simplification_epsilon: float,
     df: pd.DataFrame,
     simplified_df: pd.DataFrame,
 ):
@@ -125,7 +125,12 @@ def visualize_all(
             ).write_image(
                 str(
                     Path(plot_path).joinpath(
-                        "speed_full_simplified_" + driver + str(weight) + ".png"
+                        "speed_full_simplified_"
+                        + driver
+                        + str(weight)
+                        + "_"
+                        + str(simplification_epsilon)
+                        + ".png"
                     )
                 )
             )
@@ -155,6 +160,102 @@ def visualize_all(
                         + driver
                         + "_"
                         + str(weight)
+                        + ".png"
+                    )
+                )
+            )
+            visualize_signal(
+                df,
+                to_visualize + "x",
+                unit,
+                "Pitch" if full_name == "Orientation" else full_name + " along x axis",
+                (
+                    simplified_df,
+                    (
+                        "Pitch "
+                        if full_name == "Orientation"
+                        else (full_name + " along x axis ")
+                    )
+                    + "on the simplified path",
+                ),
+            ).write_image(
+                str(
+                    Path(plot_path).joinpath(
+                        (
+                            (full_name.lower() + "_pitch")
+                            if full_name == "Orientation"
+                            else (full_name + "x")
+                        )
+                        + "_"
+                        + driver
+                        + "_"
+                        + str(weight)
+                        + "_"
+                        + str(simplification_epsilon)
+                        + ".png"
+                    )
+                )
+            )
+            visualize_signal(
+                df,
+                to_visualize + "y",
+                unit,
+                "Yaw" if full_name == "Orientation" else full_name + " along y axis",
+                (
+                    simplified_df,
+                    (
+                        "Yaw "
+                        if full_name == "Orientation"
+                        else (full_name + " along y axis ")
+                    )
+                    + "on the simplified path",
+                ),
+            ).write_image(
+                str(
+                    Path(plot_path).joinpath(
+                        (
+                            (full_name.lower() + "_yaw")
+                            if full_name == "Orientation"
+                            else (full_name + "y")
+                        )
+                        + "_"
+                        + driver
+                        + "_"
+                        + str(weight)
+                        + "_"
+                        + str(simplification_epsilon)
+                        + ".png"
+                    )
+                )
+            )
+            visualize_signal(
+                df,
+                to_visualize + "z",
+                unit,
+                "Roll" if full_name == "Orientation" else full_name + " along z axis",
+                (
+                    simplified_df,
+                    (
+                        "Roll "
+                        if full_name == "Orientation"
+                        else (full_name + " along z axis ")
+                    )
+                    + "on the simplified path",
+                ),
+            ).write_image(
+                str(
+                    Path(plot_path).joinpath(
+                        (
+                            full_name.lower() + "_roll"
+                            if full_name == "Orientation"
+                            else (full_name + "z")
+                        )
+                        + "_"
+                        + driver
+                        + "_"
+                        + str(weight)
+                        + "_"
+                        + str(simplification_epsilon)
                         + ".png"
                     )
                 )

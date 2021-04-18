@@ -21,7 +21,7 @@ def parse(data_path: str):
 def __parse_dir(data_path: Path, sensor_position: SensorPosition, driver: Driver):
     out = []
     for file_path in data_path.joinpath(
-        str(sensor_position.name).lower(), str(driver.name).lower() + "_driver"
+        str(sensor_position.name).lower(), str(driver.name).lower()
     ).iterdir():
         out.append(pd.read_csv(file_path))
     return out

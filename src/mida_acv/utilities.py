@@ -47,7 +47,24 @@ def to_tsfresh(data_path: str) -> Tuple[pd.DataFrame, pd.Series, pd.Series]:
 
 
 def window_df(df: pd.DataFrame):
-    print(df)
     return roll_time_series(
         df, column_id="id", column_sort="Timestamp", column_kind=None
     )
+
+
+def align(signal_1: np.array, signal_2: np.array):
+    # Standardization
+    signal_1 = (signal_1 - np.mean(signal_1)) / np.std(signal_1)
+    signal_2 = (signal_2 - np.mean(signal_2)) / np.std(signal_2)
+
+    # Cross-Correlation
+    correlation = np.correlate(signal_1, signal_2, "full")
+    center = len(correlation) - min(len(signal_1), len(signal_1))
+    max_position = correlation.argmax()
+    phase = np.abs(center - max_position)
+    if phase == 0:
+        reversed_correlation_signal = correlation[::-1]
+        max_position_reversed = reversed_correlation_signal.argmax()
+        phase_reversed = np.abs(center - max_position_reversed)
+        phase = np.max([phase, phase_reversed])
+    return signal_1, signal_2[phase:]

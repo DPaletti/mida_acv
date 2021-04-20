@@ -14,17 +14,20 @@ def main():
     simplification_epsilon = 0.000001
     simplified_data_path = "./data/simplified_datasets_" + str(simplification_epsilon)
     resource_path = "./resources"
-    ts, weight_series, drivers_series = to_tsfresh(simplified_data_path)
-    print(ts)
-    print(weight_series)
-    print(drivers_series)
-    #    rolled_df = window_df(tsfresh_df)
-    feat = features(ts, weight_series)
-    # data_dict: Dict[str, List[pd.Dataframe]] = remove_incremental_column(
-    #    parse(data_path)
-    # )
-    # data_dict_simplified = simplify_path(data_dict, simplification_epsilon)
-    # write_to_csv(simplified_data_path, data_dict_simplified)
+    visualize_signal(
+        pd.read_csv(
+            data_path + "/stem/single/Calibrated_Davide_Conficconi_115_stem.csv"
+        ),
+        "Ax",
+        "m/s^2",
+        "Acceleration along x axis recorded from the stem",
+        (
+            pd.read_csv(
+                data_path + "/deck/single/Calibrated_Davide_Conficconi_115_deck.csv"
+            ),
+            "Acceleration along x axis recorded from the deck",
+        ),
+    ).show()
     # visualize_all(
     #    "./resources/plots",
     #    "alberto_jessica",

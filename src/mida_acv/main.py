@@ -11,25 +11,29 @@ import pandas as pd
 
 def main():
     data_path = "./data"
-    simplification_epsilon = 0.000001
+    simplification_epsilon = 1e-6
     simplified_data_path = "./data/simplified_datasets_" + str(simplification_epsilon)
     resource_path = "./resources"
-    visualize_signal(
-        pd.read_csv(
-            data_path + "/stem/single/Calibrated_Davide_Conficconi_115_stem.csv"
-        ),
-        "Ax",
-        "m/s^2",
-        "Acceleration along x axis recorded from the stem",
-        (
-            pd.read_csv(
-                data_path + "/deck/single/Calibrated_Davide_Conficconi_115_deck.csv"
-            ),
-            "Acceleration along x axis recorded from the deck",
-        ),
-    ).show()
-    # visualize_all(
-    #    "./resources/plots",
+    parsed = parse(data_path)
+    # print(parsed)
+    visualize_path(parsed["stem-single"][0], data_path)
+
+    # visualize_signal(
+    #    pd.read_csv(
+    #        data_path + "/stem/single/Calibrated_Davide_Conficconi_115_stem.csv"
+    #    ),
+    #   "Ax",
+    #   "m/s^2",
+    #   "Acceleration along x axis recorded from the stem",
+    #   (
+    #       pd.read_csv(
+    #           data_path + "/deck/single/Calibrated_Davide_Conficconi_115_deck.csv"
+    #       ),
+    #       "Acceleration along x axis recorded from the deck",
+    #  ),
+    # ).show()
+    # #visualize_all(
+    # #   "./resources/plots",
     #    "alberto_jessica",
     #    108,
     #    simplification_epsilon,

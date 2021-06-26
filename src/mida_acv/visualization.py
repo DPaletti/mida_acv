@@ -11,7 +11,7 @@ def visualize_path(df: pd.DataFrame, mapbox_token_path: str, *args):
             mode="lines",
             lon=df["Longitude"],
             lat=df["Latitude"],
-            marker={"size": 5},
+            marker={"size": 5, "color": "red"},
         )
     )
     for _df in args:

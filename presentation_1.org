@@ -1,0 +1,216 @@
+#+TITLE: State of MIDA-ACV Project
+#+AUTHOR: \href{mailto:lorenzo.lastrucci@mail.polimi.it}{Lorenzo Lastrucci}, \href{mailto:daniele.paletti@mail.polimi.it}{Daniele Paletti}
+#+DATE:      2021-05-04
+#+PROPERTY: header-args :exports both :eval never-export
+#+LATEX_CLASS_OPTIONS: [presentation]
+#+BEAMER_HEADER: \institute[Politecnico di Milano]{Politecnico di Milano}
+#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{/home/dpaletti/Pictures/polimi.png}}
+#+OPTIONS: H:2 toc:nil
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
+#+BEAMER_HEADER: \AtBeginSection{\frame{\sectionpage}}
+#+BEAMER_HEADER: \usepackage{booktabs}
+#+BEAMER_HEADER: \usecolortheme{seahorse}
+#+BEAMER_THEME: Warsaw
+#+BEAMER_HEADER: \setbeamertemplate{headline}{}
+#+BEAMER_HEADER:\usepackage{tikz}
+#+BEAMER_HEADER:\usetikzlibrary{snakes}
+#+BEAMER_HEADER:\usepackage{rotating}
+
+* Data Exploration
+** Scooter Path
+#+CAPTION: Path from Coral's Run (stem recording)
+#+NAME: fig:path_giovanni_coral
+[[/home/dpaletti/Pictures/path_giovanni_coral_red.png]]
+** Speed: one driver, low weight
+#+CAPTION: Speed from Leoni's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/speed_full_leoni_35.png]]
+** Speed: one driver, high weight
+#+CAPTION: Speed from Didonato's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/speed_full_didonato_105.png]]
+
+** Speed: two drivers
+#+CAPTION: Speed from Didonato and Leoni's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/mida_acv/resources/plots/speed_full_alberto_jessica_108.png]]
+** Acceleration: one driver, low weight
+#+CAPTION: Acceleration from Leoni's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/acceleration_full_leoni_35.png]]
+** Acceleration: one driver, high weight
+#+CAPTION: Acceleration from Didonato's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/acceleration_full_didonato_105.png]]
+** Acceleration: two drivers
+#+CAPTION: Acceleration from Didonato and Leoni's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/mida_acv/resources/plots/acceleration_full_alberto_jessica_108.png]]
+
+** Jerk: one driver, low weight
+#+CAPTION: Jerk from Leoni's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/jerk_full_leoni_35.png]]
+** Jerk: one driver, high weight
+#+CAPTION: Jerk from Didonato's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/jerk_full_didonato_105.png]]
+** Jerk: two drivers
+#+CAPTION: Jerk from Didonato and Leoni's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/mida_acv/resources/plots/jerk_full_alberto_jessica_108.png]]
+
+** Orientation: one driver, low weight
+#+CAPTION: Orientation from Leoni's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/orientation_full_leoni_35.png]]
+** Orientation: one driver, high weight
+#+CAPTION: Orientation from Didonato's recording
+#+NAME: fig:speed_jessica
+[[/home/dpaletti/mida_acv/resources/plots/orientation_full_didonato_105.png]]
+** Orientation: two drivers
+#+CAPTION: Orientation from Didonato and Leoni's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/mida_acv/resources/plots/orientation_full_alberto_jessica_108.png]]
+* Data Cleaning
+** Removing low speed
+When speed goes lower than 5 km/h the *rider is not on board*, so those points can be removed.
+#+CAPTION: Speed from Renzo and Jessica's recording with speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/speed_renzo_jessica_high.png]]
+** Removing low speed: acceleration along x axis
+#+CAPTION: Acceleration along x axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/ax_renzo_jessica_high.png]]
+** Removing low speed: acceleration along y axis
+#+CAPTION: Acceleration along y axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/ay_renzo_jessica_high.png]]
+** Removing low speed: acceleration along y axis
+#+CAPTION: Acceleration along y axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/az_renzo_jessica_high.png]]
+** Removing low speed: jerk along x axis
+#+CAPTION: Jerk along x axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_x_renzo_jessica_high.png]]
+** Removing low speed: jerk along y axis
+#+CAPTION: Jerk along y axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_y_renzo_jessica_high.png]]
+** Removing low speed: jerk along z axis
+#+CAPTION: Jerk along z axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_z_renzo_jessica_high.png]]
+** Removing low speed: orientation along x axis
+#+CAPTION: Orientation along x axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gx_renzo_jessica_high.png]]
+** Removing low speed: orientation along y axis
+#+CAPTION: Orientation along y axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gy_renzo_jessica_high.png]]
+** Removing low speed: orientation along z axis
+#+CAPTION: Orientation along z axis from Renzo and Jessica's recording with corresponging speed > 5 km/h
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gz_renzo_jessica_high.png]]
+** Filtering at 1 Hz
+When extracting features in the *time domain* we are not interested in information contained above 1Hz. \newline
+Our data is already filtered at 20 Hz.
+#+CAPTION: Speed filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/speed_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: acceleration along x axis
+#+CAPTION: Acceleration along x axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/ax_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: acceleration along y axis
+#+CAPTION: Acceleration along y axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/ay_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: acceleration along z axis
+#+CAPTION: Acceleration along z axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/az_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: jerk along x axis
+#+CAPTION: Jerk along x axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_x_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: jerk along y axis
+#+CAPTION: Jerk along y axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_y_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: jerk along z axis
+#+CAPTION: Jerk along z axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/jerk_z_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: orientation along x axis
+#+CAPTION: Orientation along x axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gx_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: orientation along y axis
+#+CAPTION: Orientation along y axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gy_renzo_jessica_filtered.png]]
+** Filtering at 1 Hz: orientation along z axis
+#+CAPTION: Orientation along z axis filtered at 1 Hz from Renzo and Jessica's recording
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/gz_renzo_jessica_filtered.png]]
+* Data Selection
+** Path simplification
+*Ramer-Douglas-Pecker* algorithm can be used to *downsample* input data to remove redundant points on straight lines. \newline
+The only algorithm parameter is *epsilon*, the lower the more points are retained. \newline
+We decided non to use this approach because in the *frequency* domain a lot of relevant *information is lost*.
+#+CAPTION: Simplified Path of Jessica and Alberto's recording (epsilon=1e-6)
+#+NAME: fig:speed_alberto_jessica
+[[/home/dpaletti/Pictures/path_jessica_alberto_simplified.png]]
+** Path simplification time domain: 0.7% samples
+#+CAPTION: Simplified Acceleration of Jessica and Alberto's recording (epsilon=1e-6, 6000/768000 samples on the whole stem dataset)
+[[/home/dpaletti/mida_acv/resources/plots/Accelerationx_alberto_jessica_108_0.000001.png]]
+** Path simplification frequency domain: 20% samples
+#+CAPTION: Simplified Acceleration of Jessica and Alberto's recording (epsilon=1e-14)
+[[/home/dpaletti/Pictures/ax_spectrum_1e-14.png]]
+** Path simplification frequency domain: 80% samples
+#+CAPTION: Simplified Acceleration of Jessica and Alberto's recording (epsilon=1e-16)
+[[/home/dpaletti/Pictures/ax_1e-16.png]]
+
+** Downsampling
+Regular downsampling, taking *one every two samples*, allows to halve the original sampling frequency while it does not effect too badly the signal in the frequency domain.
+* Feature Engineering
+** Overview
+[[/home/dpaletti/Pictures/feature_extraction_process.png]]
+** Feature extraction
+*** @@latex:@@
+:PROPERTIES:
+:BEAMER_opt: t
+:BEAMER_col: 0.5
+:END:
+
+We employ a prominent python library for time series analysis: *tsfresh*. \newline
+Feature extraction can be carried out for each measurement through the tools provided by the library. \newline
+Extracted features:
+- mean
+- variance
+- maximum
+- minimum
+- root mean square
+- fast fourier transform area
+*** @@latex:@@
+:PROPERTIES:
+:BEAMER_opt: t
+:BEAMER_col: 0.5
+:END:
+[[/home/dpaletti/Pictures/tsfresh.png]]
+** Feature Selection: Significance
+Each feature vector is individually and independently evaluated with respect to its *significance for predicting the target* under investigation.  \newline
+*Statistical tests* employed:
+- Kolmogorov-Smirnov: binary valued feature (confidence) and real valued target (weight class)
+- Kendall’s tau: real feature and real valued target
+- Two-sided univariate Fisher test: binary feature and binary valued target (two riders detection)
+- Mann-Whitney U: real valued feature and binary valued target
+** Feature Selection: p-value evaluation
+Once the tests are applied we get a *vector of p-values* quantifying the importance of each feature. \newline
+*Benjamini-Yekutieli* procedure is applied to decide which feature to keep
+* Roadmap
+** Roadmap
+[[/home/dpaletti/Pictures/roadmap.png]]
